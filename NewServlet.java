@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,12 @@ public class NewServlet extends HttpServlet {
                 out.print("<h1>Login Successful</h1>");
             }
             else{
-                out.print("<h1>Login Unsuccessful</h1>");
+                RequestDispatcher rd=request.getRequestDispatcher("/index.html");
+                out.println("<script>");
+                out.println("alert('Login Failed')");
+                out.println("</script>");
+
+  rd.include(request, response);
             }
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println("Some problem in connection");
